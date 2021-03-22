@@ -1,0 +1,11 @@
+D:\SimplBit\git\JetWallet\MyJetWallet.BitGo.Settings\src\MyJetWallet.BitGo.Settings\bin\Debug\net5.0\MyJetWallet.BitGo.Settings.deps.json
+D:\SimplBit\git\JetWallet\MyJetWallet.BitGo.Settings\src\MyJetWallet.BitGo.Settings\bin\Debug\net5.0\MyJetWallet.BitGo.Settings.dll
+D:\SimplBit\git\JetWallet\MyJetWallet.BitGo.Settings\src\MyJetWallet.BitGo.Settings\bin\Debug\net5.0\ref\MyJetWallet.BitGo.Settings.dll
+D:\SimplBit\git\JetWallet\MyJetWallet.BitGo.Settings\src\MyJetWallet.BitGo.Settings\bin\Debug\net5.0\MyJetWallet.BitGo.Settings.pdb
+D:\SimplBit\git\JetWallet\MyJetWallet.BitGo.Settings\src\MyJetWallet.BitGo.Settings\obj\Debug\net5.0\MyJetWallet.BitGo.Settings.GeneratedMSBuildEditorConfig.editorconfig
+D:\SimplBit\git\JetWallet\MyJetWallet.BitGo.Settings\src\MyJetWallet.BitGo.Settings\obj\Debug\net5.0\MyJetWallet.BitGo.Settings.AssemblyInfoInputs.cache
+D:\SimplBit\git\JetWallet\MyJetWallet.BitGo.Settings\src\MyJetWallet.BitGo.Settings\obj\Debug\net5.0\MyJetWallet.BitGo.Settings.AssemblyInfo.cs
+D:\SimplBit\git\JetWallet\MyJetWallet.BitGo.Settings\src\MyJetWallet.BitGo.Settings\obj\Debug\net5.0\MyJetWallet.BitGo.Settings.csproj.CoreCompileInputs.cache
+D:\SimplBit\git\JetWallet\MyJetWallet.BitGo.Settings\src\MyJetWallet.BitGo.Settings\obj\Debug\net5.0\MyJetWallet.BitGo.Settings.dll
+D:\SimplBit\git\JetWallet\MyJetWallet.BitGo.Settings\src\MyJetWallet.BitGo.Settings\obj\Debug\net5.0\ref\MyJetWallet.BitGo.Settings.dll
+D:\SimplBit\git\JetWallet\MyJetWallet.BitGo.Settings\src\MyJetWallet.BitGo.Settings\obj\Debug\net5.0\MyJetWallet.BitGo.Settings.pdb
