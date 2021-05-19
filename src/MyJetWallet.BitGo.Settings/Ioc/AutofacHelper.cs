@@ -44,8 +44,10 @@ namespace MyJetWallet.BitGo.Settings.Ioc
                 .RegisterInstance(new MyNoSqlServerDataWriter<BitgoCoinEntity>(myNoSqlWriterUrl, BitgoCoinEntity.TableName, true))
                 .As<IMyNoSqlServerDataWriter<BitgoCoinEntity>>()
                 .SingleInstance();
-        }
 
-        
+            builder.RegisterType<AssetMapperSettingsService>()
+                .As<IAssetMapperSettingsService>()
+                .SingleInstance();
+        }
     }
 }
