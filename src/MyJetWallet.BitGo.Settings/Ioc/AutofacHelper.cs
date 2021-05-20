@@ -48,6 +48,10 @@ namespace MyJetWallet.BitGo.Settings.Ioc
             builder.RegisterType<BitGoAssetMapSettingsService>()
                 .As<IBitGoAssetMapSettingsService>()
                 .SingleInstance();
+            
+            builder.RegisterType<BitGoCoinSettingsService>()
+                .As<IBitGoCoinSettingsService>()
+                .SingleInstance();
         }
     }
 }
