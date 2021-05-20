@@ -13,8 +13,9 @@ namespace MyJetWallet.BitGo.Settings.NoSql
         public string Coin { get; set; }
         public int Accuracy { get; set; }
         public Double Divider { get; set; }
+        public int RequiredConfirmations { get; set; }
 
-        public static BitgoCoinEntity Create(string coin, int accuracy)
+        public static BitgoCoinEntity Create(string coin, int accuracy, int requiredConfirmations)
         {
             var entity = new BitgoCoinEntity()
             {
@@ -22,7 +23,8 @@ namespace MyJetWallet.BitGo.Settings.NoSql
                 RowKey = GenerateRowKey(coin),
                 Coin = coin,
                 Accuracy = accuracy,
-                Divider = Math.Pow(10, accuracy)
+                Divider = Math.Pow(10, accuracy),
+                RequiredConfirmations = requiredConfirmations
             };
 
             return entity;
@@ -30,7 +32,7 @@ namespace MyJetWallet.BitGo.Settings.NoSql
 
         public long AmountToAbsoluteValue(double amount)
         {
-            return (long)Math.Round(amount * Divider, 0);
+            return (long) Math.Round(amount * Divider, 0);
         }
 
         public double AmountFromAbsoluteValue(long value)

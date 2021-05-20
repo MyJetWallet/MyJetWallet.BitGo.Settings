@@ -13,7 +13,8 @@ namespace MyJetWallet.BitGo.Settings.Services
         private readonly IMyNoSqlServerDataReader<BitgoAssetMapEntity> _assetMap;
         private readonly IMyNoSqlServerDataReader<BitgoCoinEntity> _bitgoCoins;
 
-        public AssetMapper(IMyNoSqlServerDataReader<BitgoAssetMapEntity> assetMap, IMyNoSqlServerDataReader<BitgoCoinEntity> bitgoCoins)
+        public AssetMapper(IMyNoSqlServerDataReader<BitgoAssetMapEntity> assetMap,
+            IMyNoSqlServerDataReader<BitgoCoinEntity> bitgoCoins)
         {
             _assetMap = assetMap;
             _bitgoCoins = bitgoCoins;
@@ -21,7 +22,8 @@ namespace MyJetWallet.BitGo.Settings.Services
 
         public (string, string) AssetToBitgoCoinAndWallet(string brokerId, string assetSymbol)
         {
-            var map = _assetMap.Get(BitgoAssetMapEntity.GeneratePartitionKey(brokerId), BitgoAssetMapEntity.GenerateRowKey(assetSymbol));
+            var map = _assetMap.Get(BitgoAssetMapEntity.GeneratePartitionKey(brokerId),
+                BitgoAssetMapEntity.GenerateRowKey(assetSymbol));
 
             if (map == null)
             {
@@ -40,9 +42,10 @@ namespace MyJetWallet.BitGo.Settings.Services
                 return (string.Empty, string.Empty);
             }
 
-            if (entities.Count() > 1)
+            if (entities.Count > 1)
             {
-                throw new Exception($"Cannot map BitGo wallet {walletId} coin {coin} to Asset. Table: {BitgoAssetMapEntity.TableName}. Find many assets: {JsonConvert.SerializeObject(entities)}");
+                throw new Exception(
+                    $"Cannot map BitGo wallet {walletId} coin {coin} to Asset. Table: {BitgoAssetMapEntity.TableName}. Find many assets: {JsonConvert.SerializeObject(entities)}");
             }
 
             var entity = entities.First();
@@ -50,13 +53,35 @@ namespace MyJetWallet.BitGo.Settings.Services
             return (entity.BrokerId, entity.AssetSymbol);
         }
 
+        public bool IsWalletEnabled(string coin, string bitgoWalletId)
+        {
+            var entities = _assetMap.Get().Where(e => e.BitgoCoin == coin).ToList();
+
+            if (!entities.Any())
+            {
+                return false;
+            }
+
+            if (entities.Count > 1)
+            {
+                throw new Exception(
+                    $"Cannot map BitGo coin {coin} to Asset. Table: {BitgoAssetMapEntity.TableName}. Find many assets: {JsonConvert.SerializeObject(entities)}");
+            }
+
+            var entity = entities.First();
+
+            return entity.IsWalletEnabled(bitgoWalletId);
+        }
+
         public long ConvertAmountToBitgo(string coin, double amount)
         {
-            var coinSettings = _bitgoCoins.Get(BitgoCoinEntity.GeneratePartitionKey(), BitgoCoinEntity.GenerateRowKey(coin));
+            var coinSettings = _bitgoCoins.Get(BitgoCoinEntity.GeneratePartitionKey(),
+                BitgoCoinEntity.GenerateRowKey(coin));
 
             if (coinSettings == null)
             {
-                throw new System.Exception($"Do not found settings for bitgo coin {coin} in nosql table {BitgoCoinEntity.TableName}");
+                throw new Exception(
+                    $"Do not found settings for bitgo coin {coin} in nosql table {BitgoCoinEntity.TableName}");
             }
 
             return coinSettings.AmountToAbsoluteValue(amount);
@@ -64,14 +89,30 @@ namespace MyJetWallet.BitGo.Settings.Services
 
         public double ConvertAmountFromBitgo(string coin, long amount)
         {
-            var coinSettings = _bitgoCoins.Get(BitgoCoinEntity.GeneratePartitionKey(), BitgoCoinEntity.GenerateRowKey(coin));
+            var coinSettings = _bitgoCoins.Get(BitgoCoinEntity.GeneratePartitionKey(),
+                BitgoCoinEntity.GenerateRowKey(coin));
 
             if (coinSettings == null)
             {
-                throw new System.Exception($"Do not found settings for bitgo coin {coin} in nosql table {BitgoCoinEntity.TableName}");
+                throw new Exception(
+                    $"Do not found settings for bitgo coin {coin} in nosql table {BitgoCoinEntity.TableName}");
             }
 
             return coinSettings.AmountFromAbsoluteValue(amount);
+        }
+
+        public int GetRequiredConfirmations(string coin)
+        {
+            var coinSettings = _bitgoCoins.Get(BitgoCoinEntity.GeneratePartitionKey(),
+                BitgoCoinEntity.GenerateRowKey(coin));
+
+            if (coinSettings == null)
+            {
+                throw new Exception(
+                    $"Do not found settings for bitgo coin {coin} in nosql table {BitgoCoinEntity.TableName}");
+            }
+
+            return coinSettings.RequiredConfirmations;
         }
     }
 }
