@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
 using MyNoSqlServer.Abstractions;
 
 namespace MyJetWallet.BitGo.Settings.NoSql
@@ -13,11 +13,11 @@ namespace MyJetWallet.BitGo.Settings.NoSql
         public string BrokerId { get; set; }
         public string AssetSymbol { get; set; }
         public string BitgoWalletId { get; set; }
-        public List<string> EnabledBitgoWalletIds { get; set; }
+        public string EnabledBitgoWalletIds { get; set; }
         public string BitgoCoin { get; set; }
 
         public static BitgoAssetMapEntity Create(string brokerId, string assetSymbol, string bitgoWalletId,
-            List<string> enabledBitgoWalletIds, string bitgoCoin)
+            string enabledBitgoWalletIds, string bitgoCoin)
         {
             var entity = new BitgoAssetMapEntity()
             {
@@ -32,7 +32,7 @@ namespace MyJetWallet.BitGo.Settings.NoSql
 
             if (!entity.EnabledBitgoWalletIds.Contains(entity.BitgoWalletId))
             {
-                entity.EnabledBitgoWalletIds.Add(entity.BitgoWalletId);
+                entity.EnabledBitgoWalletIds += ";" + entity.BitgoWalletId;
             }
 
             return entity;
@@ -40,7 +40,7 @@ namespace MyJetWallet.BitGo.Settings.NoSql
 
         public bool IsWalletEnabled(string bitgoWalletId)
         {
-            return EnabledBitgoWalletIds.Contains(bitgoWalletId);
+            return EnabledBitgoWalletIds.Split(";").ToList().Contains(bitgoWalletId);
         }
     }
 }

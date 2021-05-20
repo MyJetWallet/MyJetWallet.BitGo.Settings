@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using MyJetWallet.BitGo.Settings.NoSql;
 
 namespace MyJetWallet.BitGo.Settings.Services
@@ -8,12 +7,12 @@ namespace MyJetWallet.BitGo.Settings.Services
     {
         ValueTask<bool> CreateBitgoAssetMapEntityAsync(string brokerId, string assetSymbol,
             string bitgoWalletId,
-            List<string> enabledBitgoWalletIds,
+            string enabledBitgoWalletIds,
             string bitgoCoin);
 
         ValueTask<bool> UpdateBitgoAssetMapEntityAsync(string brokerId, string assetSymbol,
             string bitgoWalletId,
-            List<string> enabledBitgoWalletIds,
+            string enabledBitgoWalletIds,
             string bitgoCoin);
 
         ValueTask<bool> DeleteBitgoAssetMapEntityAsync(string brokerId, string assetSymbol);

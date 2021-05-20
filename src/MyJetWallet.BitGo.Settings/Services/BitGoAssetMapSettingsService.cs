@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MyJetWallet.BitGo.Settings.NoSql;
@@ -20,7 +19,7 @@ namespace MyJetWallet.BitGo.Settings.Services
         }
 
         public async ValueTask<bool> CreateBitgoAssetMapEntityAsync(string brokerId, string assetSymbol,
-            string bitgoWalletId, List<string> enabledBitgoWalletIds, string bitgoCoin)
+            string bitgoWalletId, string enabledBitgoWalletIds, string bitgoCoin)
         {
             if (string.IsNullOrEmpty(brokerId))
                 throw new Exception("Cannot create asset map. BrokerId cannot be empty");
@@ -47,7 +46,7 @@ namespace MyJetWallet.BitGo.Settings.Services
         }
 
         public async ValueTask<bool> UpdateBitgoAssetMapEntityAsync(string brokerId, string assetSymbol,
-            string bitgoWalletId, List<string> enabledBitgoWalletIds, string bitgoCoin)
+            string bitgoWalletId, string enabledBitgoWalletIds, string bitgoCoin)
         {
             if (string.IsNullOrEmpty(brokerId))
                 throw new Exception("Cannot update asset map. BrokerId cannot be empty");

@@ -18,7 +18,8 @@ namespace TestApp
             await GenerateAsstToBitgoMap();
 
 
-            MyNoSqlTcpClient myNoSqlClient = new MyNoSqlTcpClient(() => "192.168.10.80:5125", "test-bitgo-settings-app");
+            MyNoSqlTcpClient myNoSqlClient =
+                new MyNoSqlTcpClient(() => "192.168.10.80:5125", "test-bitgo-settings-app");
 
             var mapper = new AssetMapper(
                 new MyNoSqlReadRepository<BitgoAssetMapEntity>(myNoSqlClient, BitgoAssetMapEntity.TableName),
@@ -40,24 +41,26 @@ namespace TestApp
             var broker = "jetwallet";
             var nosqlWriterUrl = "http://192.168.10.80:5123";
 
-            var clientAsset = new MyNoSqlServerDataWriter<BitgoAssetMapEntity>(() => nosqlWriterUrl, BitgoAssetMapEntity.TableName, true);
+            var clientAsset =
+                new MyNoSqlServerDataWriter<BitgoAssetMapEntity>(() => nosqlWriterUrl, BitgoAssetMapEntity.TableName,
+                    true);
 
             var list = new List<BitgoAssetMapEntity>();
 
-            list.Add(BitgoAssetMapEntity.Create(broker, "BTC", "6054ba9ca9cc0e0024a867a7d8b401b2", new List<string>(), "tbtc"));
-            list.Add(BitgoAssetMapEntity.Create(broker, "XLM", "6054bc003dc1af002b0d54bf5b552f28", new List<string>(), "txlm"));
-            list.Add(BitgoAssetMapEntity.Create(broker, "LTC", "6054be73b765620006aa87311f43bd47", new List<string>(), "tltc"));
-            list.Add(BitgoAssetMapEntity.Create(broker, "XRP", "60584aaded0090000628ce59c01f3a5e", new List<string>(), "txrp"));
-            list.Add(BitgoAssetMapEntity.Create(broker, "BCH", "60584b79fd3e0500669e2cf9654d726b", new List<string>(), "tbch"));
-            list.Add(BitgoAssetMapEntity.Create(broker, "ALGO", "60584becbc3e2600240548d78e61c02b", new List<string>(), "talgo"));
-            list.Add(BitgoAssetMapEntity.Create(broker, "EOS", "60584dcc6f5d31001d5a59371aeeb60a", new List<string>(), "teos"));
+            list.Add(BitgoAssetMapEntity.Create(broker, "BTC", "6054ba9ca9cc0e0024a867a7d8b401b2", "", "tbtc"));
+            list.Add(BitgoAssetMapEntity.Create(broker, "XLM", "6054bc003dc1af002b0d54bf5b552f28", "", "txlm"));
+            list.Add(BitgoAssetMapEntity.Create(broker, "LTC", "6054be73b765620006aa87311f43bd47", "", "tltc"));
+            list.Add(BitgoAssetMapEntity.Create(broker, "XRP", "60584aaded0090000628ce59c01f3a5e", "", "txrp"));
+            list.Add(BitgoAssetMapEntity.Create(broker, "BCH", "60584b79fd3e0500669e2cf9654d726b", "", "tbch"));
+            list.Add(BitgoAssetMapEntity.Create(broker, "ALGO", "60584becbc3e2600240548d78e61c02b", "", "talgo"));
+            list.Add(BitgoAssetMapEntity.Create(broker, "EOS", "60584dcc6f5d31001d5a59371aeeb60a", "", "teos"));
 
             await clientAsset.CleanAndKeepMaxPartitions(0);
             await clientAsset.BulkInsertOrReplaceAsync(list);
 
 
-
-            var clientCoin = new MyNoSqlServerDataWriter<BitgoCoinEntity>(() => nosqlWriterUrl, BitgoCoinEntity.TableName, true);
+            var clientCoin =
+                new MyNoSqlServerDataWriter<BitgoCoinEntity>(() => nosqlWriterUrl, BitgoCoinEntity.TableName, true);
 
             var listCoin = new List<BitgoCoinEntity>();
 
