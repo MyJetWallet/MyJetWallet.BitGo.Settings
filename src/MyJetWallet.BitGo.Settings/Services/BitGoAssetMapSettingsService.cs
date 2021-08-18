@@ -19,7 +19,7 @@ namespace MyJetWallet.BitGo.Settings.Services
         }
 
         public async ValueTask<bool> CreateBitgoAssetMapEntityAsync(string brokerId, string assetSymbol,
-            string bitgoWalletId, string enabledBitgoWalletIds, string bitgoCoin)
+            string bitgoWalletId, string enabledBitgoWalletIds, string bitgoCoin, double minBalance)
         {
             if (string.IsNullOrEmpty(brokerId))
                 throw new Exception("Cannot create asset map. BrokerId cannot be empty");
@@ -35,7 +35,7 @@ namespace MyJetWallet.BitGo.Settings.Services
             if (coin == null) throw new Exception("Cannot create asset map. Unknown BitgoCoin.");
 
             var entity =
-                BitgoAssetMapEntity.Create(brokerId, assetSymbol, bitgoWalletId, enabledBitgoWalletIds, bitgoCoin);
+                BitgoAssetMapEntity.Create(brokerId, assetSymbol, bitgoWalletId, enabledBitgoWalletIds, bitgoCoin, minBalance);
 
             var existingItem = await _assetMap.GetAsync(entity.PartitionKey, entity.RowKey);
             if (existingItem != null) throw new Exception("Cannot create asset map. Already exist");
@@ -46,7 +46,7 @@ namespace MyJetWallet.BitGo.Settings.Services
         }
 
         public async ValueTask<bool> UpdateBitgoAssetMapEntityAsync(string brokerId, string assetSymbol,
-            string bitgoWalletId, string enabledBitgoWalletIds, string bitgoCoin)
+            string bitgoWalletId, string enabledBitgoWalletIds, string bitgoCoin, double minBalance)
         {
             if (string.IsNullOrEmpty(brokerId))
                 throw new Exception("Cannot update asset map. BrokerId cannot be empty");
@@ -62,7 +62,7 @@ namespace MyJetWallet.BitGo.Settings.Services
             if (coin == null) throw new Exception("Cannot update asset map. Unknown BitgoCoin.");
 
             var entity = BitgoAssetMapEntity.Create(brokerId, assetSymbol, bitgoWalletId,
-                enabledBitgoWalletIds, bitgoCoin);
+                enabledBitgoWalletIds, bitgoCoin, minBalance);
 
             var existingEntity = await _assetMap.GetAsync(entity.PartitionKey, entity.RowKey);
             if (existingEntity == null) throw new Exception("Cannot update asset map. Asset map not found");

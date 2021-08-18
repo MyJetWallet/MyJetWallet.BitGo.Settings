@@ -8,12 +8,14 @@ namespace MyJetWallet.BitGo.Settings.Services
         ValueTask<bool> CreateBitgoAssetMapEntityAsync(string brokerId, string assetSymbol,
             string bitgoWalletId,
             string enabledBitgoWalletIds,
-            string bitgoCoin);
+            string bitgoCoin, 
+            double minBalance);
 
         ValueTask<bool> UpdateBitgoAssetMapEntityAsync(string brokerId, string assetSymbol,
             string bitgoWalletId,
             string enabledBitgoWalletIds,
-            string bitgoCoin);
+            string bitgoCoin, 
+            double minBalance);
 
         ValueTask<bool> DeleteBitgoAssetMapEntityAsync(string brokerId, string assetSymbol);
 
