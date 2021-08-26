@@ -114,5 +114,18 @@ namespace MyJetWallet.BitGo.Settings.Services
 
             return coinSettings.RequiredConfirmations;
         }
+
+        public string GetTagSeparator(string brokerId, string assetSymbol)
+        {
+            var map = _assetMap.Get(BitgoAssetMapEntity.GeneratePartitionKey(brokerId),
+                BitgoAssetMapEntity.GenerateRowKey(assetSymbol));
+
+            if (map == null)
+            {
+                return string.Empty;
+            }
+
+            return map.TagSeparator;
+        }
     }
 }

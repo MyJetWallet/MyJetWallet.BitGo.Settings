@@ -18,8 +18,10 @@ namespace MyJetWallet.BitGo.Settings.NoSql
         
         public double MinBalance { get; set; }
 
+        public string TagSeparator { get; set; }
+
         public static BitgoAssetMapEntity Create(string brokerId, string assetSymbol, string bitgoWalletId,
-            string enabledBitgoWalletIds, string bitgoCoin, double minBalance)
+            string enabledBitgoWalletIds, string bitgoCoin, double minBalance, string tagSeparator = null)
         {
             var entity = new BitgoAssetMapEntity()
             {
@@ -30,7 +32,8 @@ namespace MyJetWallet.BitGo.Settings.NoSql
                 BitgoCoin = bitgoCoin,
                 BitgoWalletId = bitgoWalletId,
                 EnabledBitgoWalletIds = enabledBitgoWalletIds,
-                MinBalance = minBalance
+                MinBalance = minBalance,
+                TagSeparator = tagSeparator
             };
 
             if (!entity.EnabledBitgoWalletIds.Contains(entity.BitgoWalletId))

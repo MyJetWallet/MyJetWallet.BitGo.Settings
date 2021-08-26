@@ -13,5 +13,7 @@
         double ConvertAmountFromBitgo(string coin, long amount);
 
         int GetRequiredConfirmations(string coin);
+
+        string GetTagSeparator(string brokerId, string assetSymbol);
     }
 }
