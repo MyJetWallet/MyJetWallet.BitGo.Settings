@@ -87,6 +87,20 @@ namespace MyJetWallet.BitGo.Settings.Services
             return coinSettings.AmountToAbsoluteValue(amount);
         }
 
+        public decimal ConvertAmountToBitgoDecimal(string coin, double amount)
+        {
+            var coinSettings = _bitgoCoins.Get(BitgoCoinEntity.GeneratePartitionKey(),
+                BitgoCoinEntity.GenerateRowKey(coin));
+
+            if (coinSettings == null)
+            {
+                throw new Exception(
+                    $"Do not found settings for bitgo coin {coin} in nosql table {BitgoCoinEntity.TableName}");
+            }
+
+            return coinSettings.AmountToAbsoluteValueDecimal(amount);
+        }
+
         public double ConvertAmountFromBitgo(string coin, long amount)
         {
             var coinSettings = _bitgoCoins.Get(BitgoCoinEntity.GeneratePartitionKey(),
@@ -99,6 +113,20 @@ namespace MyJetWallet.BitGo.Settings.Services
             }
 
             return coinSettings.AmountFromAbsoluteValue(amount);
+        }
+
+        public double ConvertAmountFromBitgoDecimal(string coin, decimal amount)
+        {
+            var coinSettings = _bitgoCoins.Get(BitgoCoinEntity.GeneratePartitionKey(),
+                BitgoCoinEntity.GenerateRowKey(coin));
+
+            if (coinSettings == null)
+            {
+                throw new Exception(
+                    $"Do not found settings for bitgo coin {coin} in nosql table {BitgoCoinEntity.TableName}");
+            }
+
+            return coinSettings.AmountFromAbsoluteValueDecimal(amount);
         }
 
         public int GetRequiredConfirmations(string coin)

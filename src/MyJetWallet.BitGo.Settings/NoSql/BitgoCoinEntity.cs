@@ -34,10 +34,18 @@ namespace MyJetWallet.BitGo.Settings.NoSql
         {
             return decimal.ToInt64(decimal.Round(new decimal(amount * Divider), 0));
         }
-
+        public decimal AmountToAbsoluteValueDecimal(double amount)
+        {
+            return decimal.Round(new decimal(amount * Divider), 0);
+        }
         public double AmountFromAbsoluteValue(long value)
         {
             return decimal.ToDouble(decimal.Round(new decimal(value / Divider), Accuracy));
+        }
+
+        public double AmountFromAbsoluteValueDecimal(decimal value)
+        {
+            return decimal.ToDouble(decimal.Round(value / new decimal(Divider), Accuracy));
         }
     }
 }
