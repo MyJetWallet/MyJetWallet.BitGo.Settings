@@ -8,13 +8,9 @@
 
         bool IsWalletEnabled(string coin, string bitgoWalletId);
 
-        long ConvertAmountToBitgo(string coin, double amount);
+        decimal ConvertAmountToBitgo(string coin, double amount);
 
-        decimal ConvertAmountToBitgoDecimal(string coin, double amount);
-
-        double ConvertAmountFromBitgo(string coin, long amount);
-
-        double ConvertAmountFromBitgoDecimal(string coin, decimal amount);
+        double ConvertAmountFromBitgo(string coin, decimal amount);
 
         int GetRequiredConfirmations(string coin);
 
