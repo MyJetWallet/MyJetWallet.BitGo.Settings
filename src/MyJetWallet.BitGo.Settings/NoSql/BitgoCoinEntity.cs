@@ -15,7 +15,9 @@ namespace MyJetWallet.BitGo.Settings.NoSql
         public Double Divider { get; set; }
         public int RequiredConfirmations { get; set; }
 
-        public static BitgoCoinEntity Create(string coin, int accuracy, int requiredConfirmations)
+        public bool IsMainNet { get; set; } = false;
+
+        public static BitgoCoinEntity Create(string coin, int accuracy, int requiredConfirmations, bool isMainNet)
         {
             var entity = new BitgoCoinEntity()
             {
@@ -24,7 +26,8 @@ namespace MyJetWallet.BitGo.Settings.NoSql
                 Coin = coin,
                 Accuracy = accuracy,
                 Divider = Math.Pow(10, accuracy),
-                RequiredConfirmations = requiredConfirmations
+                RequiredConfirmations = requiredConfirmations,
+                IsMainNet = isMainNet
             };
 
             return entity;

@@ -18,14 +18,14 @@ namespace MyJetWallet.BitGo.Settings.Services
             _bitgoCoins = bitgoCoins;
         }
 
-        public async ValueTask<bool> CreateBitgoCoinEntityAsync(string coin, int accuracy, int requiredConfirmations)
+        public async ValueTask<bool> CreateBitgoCoinEntityAsync(string coin, int accuracy, int requiredConfirmations, bool isMainNet)
         {
             if (string.IsNullOrEmpty(coin)) throw new Exception("Cannot create coin. Coin cannot be empty");
             if (accuracy < 0) throw new Exception("Cannot create coin. Accuracy can't be less then 0");
             if (requiredConfirmations < 0)
                 throw new Exception("Cannot create coin. RequiredConfirmations can't be less then 0");
 
-            var entity = BitgoCoinEntity.Create(coin, accuracy, requiredConfirmations);
+            var entity = BitgoCoinEntity.Create(coin, accuracy, requiredConfirmations, isMainNet);
 
             var existingItem = await _bitgoCoins.GetAsync(entity.PartitionKey, entity.RowKey);
             if (existingItem != null) throw new Exception("Cannot create coin. Already exist");
@@ -35,14 +35,14 @@ namespace MyJetWallet.BitGo.Settings.Services
             return true;
         }
 
-        public async ValueTask<bool> UpdateBitgoCoinEntityAsync(string coin, int accuracy, int requiredConfirmations)
+        public async ValueTask<bool> UpdateBitgoCoinEntityAsync(string coin, int accuracy, int requiredConfirmations, bool isMainNet)
         {
             if (string.IsNullOrEmpty(coin)) throw new Exception("Cannot update coin. Coin cannot be empty");
             if (accuracy < 0) throw new Exception("Cannot update coin. Accuracy can't be less then 0");
             if (requiredConfirmations < 0)
                 throw new Exception("Cannot update coin. RequiredConfirmations can't be less then 0");
 
-            var entity = BitgoCoinEntity.Create(coin, accuracy, requiredConfirmations);
+            var entity = BitgoCoinEntity.Create(coin, accuracy, requiredConfirmations, isMainNet);
 
             var existingItem = await _bitgoCoins.GetAsync(entity.PartitionKey, entity.RowKey);
             if (existingItem == null) throw new Exception("Cannot update coin. Coin not found");

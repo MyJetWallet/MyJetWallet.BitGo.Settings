@@ -8,7 +8,7 @@ namespace TestApp
 {
     class Program
     {
-        static async Task Main(string[] args)
+        static void Main(string[] args)
         {
             var Divider = Math.Pow(10, 18);
 
@@ -68,31 +68,31 @@ namespace TestApp
 
             var listCoin = new List<BitgoCoinEntity>();
 
-            listCoin.Add(BitgoCoinEntity.Create("algo", 6, 1));
-            listCoin.Add(BitgoCoinEntity.Create("bch", 8, 1));
-            listCoin.Add(BitgoCoinEntity.Create("btc", 8, 1));
-            listCoin.Add(BitgoCoinEntity.Create("dash", 6, 1));
-            listCoin.Add(BitgoCoinEntity.Create("eos", 4, 1));
+            listCoin.Add(BitgoCoinEntity.Create("algo", 6, 1, false));
+            listCoin.Add(BitgoCoinEntity.Create("bch", 8, 1, false));
+            listCoin.Add(BitgoCoinEntity.Create("btc", 8, 1, false));
+            listCoin.Add(BitgoCoinEntity.Create("dash", 6, 1, false));
+            listCoin.Add(BitgoCoinEntity.Create("eos", 4, 1, false));
             //listCoin.Add(BitgoCoinEntity.Create("eth", 18));
             //listCoin.Add(BitgoCoinEntity.Create("hbar", 0));
-            listCoin.Add(BitgoCoinEntity.Create("ltc", 8, 1));
-            listCoin.Add(BitgoCoinEntity.Create("trx", 6, 1));
-            listCoin.Add(BitgoCoinEntity.Create("xlm", 7, 1));
-            listCoin.Add(BitgoCoinEntity.Create("xrp", 6, 1));
-            listCoin.Add(BitgoCoinEntity.Create("zec", 8, 1));
+            listCoin.Add(BitgoCoinEntity.Create("ltc", 8, 1, false));
+            listCoin.Add(BitgoCoinEntity.Create("trx", 6, 1, false));
+            listCoin.Add(BitgoCoinEntity.Create("xlm", 7, 1, false));
+            listCoin.Add(BitgoCoinEntity.Create("xrp", 6, 1, false));
+            listCoin.Add(BitgoCoinEntity.Create("zec", 8, 1, false));
 
-            listCoin.Add(BitgoCoinEntity.Create("talgo", 6, 1));
-            listCoin.Add(BitgoCoinEntity.Create("tbch", 8, 1));
-            listCoin.Add(BitgoCoinEntity.Create("tbtc", 8, 1));
-            listCoin.Add(BitgoCoinEntity.Create("tdash", 6, 1));
-            listCoin.Add(BitgoCoinEntity.Create("teos", 4, 1));
+            listCoin.Add(BitgoCoinEntity.Create("talgo", 6, 1, false));
+            listCoin.Add(BitgoCoinEntity.Create("tbch", 8, 1, false));
+            listCoin.Add(BitgoCoinEntity.Create("tbtc", 8, 1, false));
+            listCoin.Add(BitgoCoinEntity.Create("tdash", 6, 1, false));
+            listCoin.Add(BitgoCoinEntity.Create("teos", 4, 1, false));
             //listCoin.Add(BitgoCoinEntity.Create("teth", 18));
             //listCoin.Add(BitgoCoinEntity.Create("thbar", 0));
-            listCoin.Add(BitgoCoinEntity.Create("tltc", 8, 1));
-            listCoin.Add(BitgoCoinEntity.Create("ttrx", 6, 1));
-            listCoin.Add(BitgoCoinEntity.Create("txlm", 7, 1));
-            listCoin.Add(BitgoCoinEntity.Create("txrp", 6, 1));
-            listCoin.Add(BitgoCoinEntity.Create("tzec", 8, 1));
+            listCoin.Add(BitgoCoinEntity.Create("tltc", 8, 1, false));
+            listCoin.Add(BitgoCoinEntity.Create("ttrx", 6, 1, false));
+            listCoin.Add(BitgoCoinEntity.Create("txlm", 7, 1, false));
+            listCoin.Add(BitgoCoinEntity.Create("txrp", 6, 1, false));
+            listCoin.Add(BitgoCoinEntity.Create("tzec", 8, 1, false));
 
             await clientCoin.CleanAndKeepMaxRecords(BitgoCoinEntity.TableName, 0);
             await clientCoin.BulkInsertOrReplaceAsync(listCoin);
